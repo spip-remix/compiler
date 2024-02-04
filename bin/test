@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use Spip\Component\Compilo\Compilo;
 use Spip\Component\Compilo\NullBalise;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -9,9 +10,15 @@ $b = new NullBalise;
 
 echo 'NullBalise:"' . $b . '"'.PHP_EOL;
 
+echo 'Test NullBalise:';
 echo $b == '' ? 'OK' : 'KO';
 echo PHP_EOL;
 
 echo 'call balise_NULL_dist:"' . balise_NULL_dist() . '"' . PHP_EOL;
+
+$squelette = '#NULL'; // file_get_contents('squelettes/sommaire.html')
+$page = (new Compilo())->render($squelette);
+
+echo 'Contenu HTML:"' . $page . '"' . PHP_EOL;
 
 exit(0);
