@@ -1,0 +1,21 @@
+{
+    "name": "spip/compilo",
+    "description": "Compilateur de squelette SPIP",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Spip\\Component\\Compilo\\": "src/"
+        },
+        "files": [
+            "files/balises.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "JamesRezo",
+            "email": "james@rezo.net"
+        }
+    ],
+    "require": {}
+}
