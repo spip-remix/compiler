@@ -21,4 +21,9 @@ class Compilo
     {
         return $this->renderer->render($this->transpiler->transpile($squelette));
     }
+
+    public function getMetaDonnees(): array
+    {
+        return $this->renderer->getMetaDonnees();
+    }
 }

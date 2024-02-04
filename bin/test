@@ -16,9 +16,11 @@ echo PHP_EOL;
 
 echo 'call balise_NULL_dist:"' . balise_NULL_dist() . '"' . PHP_EOL;
 
+$c = new Compilo;
 $squelette = '#NULL'; // file_get_contents('squelettes/sommaire.html')
-$page = (new Compilo())->render($squelette);
+$page = $c->render($squelette);
 
+echo 'Metadonnees: ' . var_export($c->getMetaDonnees(), true) . PHP_EOL;
 echo 'Contenu HTML:"' . $page . '"' . PHP_EOL;
 
 exit(0);

@@ -10,13 +10,22 @@ namespace Spip\Component\Compilo\Cache;
  */
 class MoteurDeRendu
 {
+    private array $metaDonnees = [];
+
     public function render(string $transpilation): string
     {
+        $this->metaDonnees['script'] = md5($transpilation);
+
         \ob_start();
         eval($transpilation);
         $content = \ob_get_clean();
 
         // echo 'rendu:"' . $content . '"' . \PHP_EOL;
         return $content;
+    }
+
+    public function getMetaDonnees(): array
+    {
+        return $this->metaDonnees;
     }
 }
