@@ -3,11 +3,10 @@
 namespace Spip\Component\Compilo;
 
 /**
- * Balise statique
+ * Balise dynamique
  * 
  * @author JamesRezo <james@rezo.net>
  */
-interface BaliseInterface
+interface BaliseDynamiqueInterface extends BaliseInterface
 {
-    public function __toString(): string;
 }
