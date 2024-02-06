@@ -2,30 +2,33 @@
 
 namespace Spip\Component\Compilo\Cache;
 
+use League\Pipeline\StageInterface;
+use Spip\Component\Compilo\CompilationContext;
+
 /**
  * Cache de niveau 2
  * Évaluation d'un scprit PHP transpilé depuis un squelette SPIP
  * 
  * @author JamesRezo <james@rezo.net>
  */
-class MoteurDeRendu
+class MoteurDeRendu implements StageInterface
 {
-    private array $metaDonnees = [];
-
-    public function render(string $transpilation): string
+    public function render(CompilationContext $context): CompilationContext
     {
-        $this->metaDonnees['script'] = md5($transpilation);
+        $transpilation = $context->getScript();
 
         \ob_start();
         eval($transpilation);
         $content = \ob_get_clean();
 
         // echo 'rendu:"' . $content . '"' . \PHP_EOL;
-        return $content;
+        $context->withRendu($content);
+
+        return $context;
     }
 
-    public function getMetaDonnees(): array
+    public function __invoke($payload)
     {
-        return $this->metaDonnees;
+        return $this->render($payload);
     }
 }

@@ -17,5 +17,13 @@
             "email": "james@rezo.net"
         }
     ],
-    "require": {}
+    "require": {
+        "spip/pipeline": "dev-main"
+    },
+    "repositories": {
+        "pipeline": {
+            "type": "git",
+            "url": "/Users/klike/Sites/JamesRezo/spip/pipeline2"
+        }
+    }
 }

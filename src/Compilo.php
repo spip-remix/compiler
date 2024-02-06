@@ -11,19 +11,27 @@ class Compilo
 
     private MoteurDeRendu $renderer;
 
+    private CompilationContext $context;
+
     public function __construct()
     {
         $this->transpiler = new Transpileur;
         $this->renderer = new MoteurDeRendu;
+        $this->context = new CompilationContext;
     }
 
-    public function render(string $squelette): string
+    public function process(string $squelette): string
     {
-        return $this->renderer->render($this->transpiler->transpile($squelette));
+        $this->context->withSquelette($squelette);
+        $renderer = $this->renderer;
+        $transpiler = $this->transpiler;
+        $this->context = $renderer($transpiler($this->context));
+
+        return $this->context->getRendu();
     }
 
-    public function getMetaDonnees(): array
+    public function getAttributes(): array
     {
-        return $this->renderer->getMetaDonnees();
+        return $this->context->getAttributes();
     }
 }

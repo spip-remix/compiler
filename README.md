@@ -63,11 +63,10 @@ Le payload du compilateur est le suivant:
   - exemple: `prive/liste/auteurs`
 - squelette: la chaine de caractères du squelette
   - en amont de l'appel au compilateur, la correspondance est faite entre `page` et la récupération du contenu d'un fichier selon une logique indépendante
-- contexte: collection d'arguments optionnels qui s'enrichit au fil du processus
+- attributs: collection d'arguments optionnels qui s'enrichit au fil du processus
   - exemples: paramètres `var_mode`, `debut_xxx`, ...
 - script: au fil du processus, le payload s'enrichit d'une référence au résultat de la transpilation
 - rendu: au fil du processus, le payload s'enrichit du rendu résultant
-- metadonnées: au fil du processus, le payload s'enrichit de metadonnées
 
 ### Étapes
 

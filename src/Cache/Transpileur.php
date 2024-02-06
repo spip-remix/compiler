@@ -2,6 +2,9 @@
 
 namespace Spip\Component\Compilo\Cache;
 
+use League\Pipeline\StageInterface;
+use Spip\Component\Compilo\CompilationContext;
+
 /**
  * Cache de niveau 1
  * Transpilation d'un squelette en scprit PHP
@@ -30,10 +33,11 @@ namespace Spip\Component\Compilo\Cache;
  *
  * @author JamesRezo <james@rezo.net>
  */
-class Transpileur
+class Transpileur implements StageInterface
 {
-    public function transpile(string $squelette): string
+    public function transpile(CompilationContext $context): CompilationContext
     {
+        $squelette = $context->getSquelette();
         $script = 'require_once dirname(__DIR__) . \'/../vendor/autoload.php\';' . \PHP_EOL . \PHP_EOL;
 
         if (\str_contains($squelette, '#NULL')) {
@@ -45,6 +49,17 @@ class Transpileur
         $script .= $squelette . \PHP_EOL;
 
         // echo 'script:"' . $script . '"' . \PHP_EOL;
-        return $script;
+
+        $context->withScript($script);
+        $attributes = $context->getAttributes();
+        $attributes['mdscript'] = md5($script);
+        $context->withAttributes($attributes);
+
+        return $context;
+    }
+
+    public function __invoke($payload)
+    {
+        return $this->transpile($payload);
     }
 }
