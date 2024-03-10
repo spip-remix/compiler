@@ -8,7 +8,7 @@ namespace Spip\Component\Compilo;
  * @todo Doit recevoir les constantes et globales historiques de SPIP liées à la compilation
  * @todo Doit recevoir les paramètres de la requête HTTP
  * @todo Doit isoler les paramètres non-cachable
- * @todo Doit energistrer les événements de compilation pour les logger et pour le mode debug
+ * @todo Peut energistrer les anomalies de compilation pour les logger et pour le mode debug
  * 
  * @author JamesRezo <james@rezo.net>
  */
@@ -83,6 +83,16 @@ class CompilationContext
     {
         $this->attributes = $attributes;
 
+        return $this;
+    }
+
+    public function withSpip(array $config): self
+    {
+        return $this;
+    }
+
+    public function withRequest(array $config): self
+    {
         return $this;
     }
 }

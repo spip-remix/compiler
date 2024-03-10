@@ -2,7 +2,6 @@
 
 namespace Spip\Component\Compilo\Cache;
 
-use League\Pipeline\StageInterface;
 use Spip\Component\Compilo\CompilationContext;
 
 /**
@@ -11,7 +10,7 @@ use Spip\Component\Compilo\CompilationContext;
  * 
  * @author JamesRezo <james@rezo.net>
  */
-class MoteurDeRendu implements StageInterface
+class MoteurDeRendu
 {
     public function render(CompilationContext $context): CompilationContext
     {

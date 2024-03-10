@@ -3,7 +3,7 @@
 namespace Spip\Component\Compilo\Tag;
 
 /**
- * Balise dynamique
+ * Balise dynamique.
  * 
  * @author JamesRezo <james@rezo.net>
  */

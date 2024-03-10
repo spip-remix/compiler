@@ -2,7 +2,7 @@
 
 namespace Spip\Component\Compilo\Cache;
 
-use League\Pipeline\StageInterface;
+use Spip\Component\Compilo\AST\Branch;
 use Spip\Component\Compilo\CompilationContext;
 
 /**
@@ -33,22 +33,18 @@ use Spip\Component\Compilo\CompilationContext;
  *
  * @author JamesRezo <james@rezo.net>
  */
-class Transpileur implements StageInterface
+class Transpileur
 {
     public function transpile(CompilationContext $context): CompilationContext
     {
         $squelette = $context->getSquelette();
         $script = 'require_once dirname(__DIR__) . \'/../vendor/autoload.php\';' . \PHP_EOL . \PHP_EOL;
 
-        if (\str_contains($squelette, '#NULL')) {
-            $squelette = \str_replace('#NULL', 'echo \'appel de la balise null\';', $squelette);
-        }
-        // recherche de boucles
-        $pattern = ',<BOUCLE(?<id>\w+)?\(,';
-        // new Boucle($matches['id'] ?? '')
-        $script .= $squelette . \PHP_EOL;
+        // Faire l'AST du squelette
+        $parser = new Parser($squelette);
+        $tree = $parser->getTree()->transpile()->getContent();
 
-        // echo 'script:"' . $script . '"' . \PHP_EOL;
+        $script .= $tree . \PHP_EOL;
 
         $context->withScript($script);
         $attributes = $context->getAttributes();

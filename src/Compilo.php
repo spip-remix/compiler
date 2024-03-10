@@ -16,16 +16,17 @@ class Compilo
 
     private CompilationContext $context;
 
-    public function __construct()
+    public function __construct(
+        ?CompilationContext $context = null,
+    )
     {
         $this->transpiler = new Transpileur;
         $this->renderer = new MoteurDeRendu;
-        $this->context = new CompilationContext;
+        $this->context = $context ?? new CompilationContext;
     }
 
-    public function process(string $squelette): string
+    public function process(): string
     {
-        $this->context->withSquelette($squelette);
         $renderer = $this->renderer;
         $transpiler = $this->transpiler;
         $this->context = $renderer($transpiler($this->context));
@@ -38,8 +39,8 @@ class Compilo
         return $this->context->getAttributes();
     }
 
-    public function __invoke($payload)
+    public function __invoke()
     {
-        return $this->process($payload);
+        return $this->process();
     }
 }

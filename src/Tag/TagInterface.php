@@ -3,7 +3,7 @@
 namespace Spip\Component\Compilo\Tag;
 
 /**
- * Balise statique
+ * Balise statique.
  * 
  * @author JamesRezo <james@rezo.net>
  */

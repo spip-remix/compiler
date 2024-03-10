@@ -2,12 +2,16 @@
 
 namespace Spip\Component\Compilo\Tag;
 
+use Spip\Component\Compilo\AST\Branch;
+use Spip\Component\Compilo\AST\Leaf;
+use Spip\Component\Compilo\AST\TreeInterface;
+
 /**
  * Balise abstraite.
  *
  * @author JamesRezo <james@rezo.net>
  */
-abstract class AbstractTag implements TagInterface
+abstract class AbstractTag extends Leaf
 {
     /** Expression régulière par défaut pour parser une #BALISE SPIP */
     protected const REGEXP_GENERALE = '/^(.*)#([A-Z]+)(\*{1,2}?)(.*)$/Uims';
@@ -33,15 +37,18 @@ abstract class AbstractTag implements TagInterface
         private string $after = '',
         private string $loopReference = '',
     ) {
-        $this->parse($tag);
     }
 
     abstract public function __toString(): string;
 
-    protected function parse(string $tag): void
+    abstract public function add(TreeInterface $noisette): static;
+
+    public function parse(): TreeInterface
     {
-        $success = \preg_match(self::REGEXP_GENERALE, $tag, $matches);
+        $success = \preg_match(self::REGEXP_GENERALE, $this->tag, $matches);
 
         var_dump($matches);
+
+        return new Branch;
     }
 }
