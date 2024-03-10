@@ -1,24 +1,27 @@
 #!/usr/bin/env php
 <?php
 
+use Spip\Component\Compilo\CompilationContext;
 use Spip\Component\Compilo\Compilo;
-use Spip\Component\Compilo\NullBalise;
+use Spip\Component\Compilo\NullTag;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$b = new NullBalise;
+$p = new CompilationContext;
+$b = new NullTag;
 
-echo 'NullBalise:"' . $b . '"'.PHP_EOL;
+echo 'NullTag:"' . $b . '"'.PHP_EOL;
 
-echo 'Test NullBalise:';
+echo 'Test NullTag:';
 echo $b == '' ? 'OK' : 'KO';
 echo PHP_EOL;
 
-echo 'call balise_NULL_dist:"' . balise_NULL_dist() . '"' . PHP_EOL;
+echo 'call balise_NULL_dist:"' . balise_NULL_dist($p) . '"' . PHP_EOL;
+
+$squelette = '#NULL'; // file_get_contents('./squelettes-dist/sommaire.html')
 
 $c = new Compilo;
-$squelette = '#NULL'; // file_get_contents('./squelettes-dist/sommaire.html')
-$page = $c->process($squelette);
+$page = $c($squelette);
 
 echo 'Attibuts: ' . var_export($c->getAttributes(), true) . PHP_EOL;
 echo 'Contenu HTML:"' . $page . '"' . PHP_EOL;

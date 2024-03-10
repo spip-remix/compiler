@@ -1,10 +1,11 @@
 <?php
 
-use Spip\Component\Compilo\NullBalise;
+use Spip\Component\Compilo\CompilationContext;
+use Spip\Component\Compilo\NullTag;
 
-function balise_NULL_dist()
+function balise_NULL_dist(CompilationContext $cc)
 {
-    $balise = new NullBalise;
+    $balise = new NullTag;
 
     return (string) $balise;
 }

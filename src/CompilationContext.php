@@ -5,12 +5,19 @@ namespace Spip\Component\Compilo;
 /**
  * Payload du compilateur.
  * 
+ * @todo Doit recevoir les constantes et globales historiques de SPIP liées à la compilation
+ * @todo Doit recevoir les paramètres de la requête HTTP
+ * @todo Doit isoler les paramètres non-cachable
+ * @todo Doit energistrer les événements de compilation pour les logger et pour le mode debug
+ * 
  * @author JamesRezo <james@rezo.net>
  */
 class CompilationContext
 {
+    /** @var string|null le résultat final */
     private ?string $page = null;
 
+    /** @var string|null le fichier squelette à compiler */
     private ?string $squelette = null;
 
     private ?string $script = null;
@@ -19,7 +26,7 @@ class CompilationContext
 
     private array $attributes = [];
 
-    public function getPage(): string
+    public function getPage(): ?string
     {
         return $this->page;
     }
@@ -31,7 +38,7 @@ class CompilationContext
         return $this;
     }
 
-    public function getSquelette(): string
+    public function getSquelette(): ?string
     {
         return $this->squelette;
     }
@@ -43,7 +50,7 @@ class CompilationContext
         return $this;
     }
 
-    public function getScript(): string
+    public function getScript(): ?string
     {
         return $this->script;
     }
@@ -55,7 +62,7 @@ class CompilationContext
         return $this;
     }
 
-    public function getRendu(): string
+    public function getRendu(): ?string
     {
         return $this->rendu;
     }

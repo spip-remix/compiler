@@ -5,6 +5,9 @@ namespace Spip\Component\Compilo;
 use Spip\Component\Compilo\Cache\MoteurDeRendu;
 use Spip\Component\Compilo\Cache\Transpileur;
 
+/**
+ * @todo Doit déclencher des événements afin d'ennrichir le comportement du compilateur avec des observateurs personnalisés
+ */
 class Compilo
 {
     private Transpileur $transpiler;
@@ -33,5 +36,10 @@ class Compilo
     public function getAttributes(): array
     {
         return $this->context->getAttributes();
+    }
+
+    public function __invoke($payload)
+    {
+        return $this->process($payload);
     }
 }

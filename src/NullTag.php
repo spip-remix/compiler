@@ -2,6 +2,8 @@
 
 namespace Spip\Component\Compilo;
 
+use Spip\Component\Compilo\Tag\TagInterface;
+
 /**
  * Balise statique qui renvoie une chaine vide.
  *
@@ -12,7 +14,7 @@ namespace Spip\Component\Compilo;
  *
  * @author JamesRezo <james@rezo.net>
  */
-class NullBalise implements BaliseInterface
+class NullTag implements TagInterface
 {
     public function __toString(): string
     {

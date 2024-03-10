@@ -8,7 +8,19 @@
             "Spip\\Component\\Compilo\\": "src/"
         },
         "files": [
-            "files/balises.php"
+            "files/balises.php",
+            "bootstrap/inc/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Acme\\Filter\\": "tests/Fixtures/",
+            "Spip\\Component\\Compilo\\Test\\": "tests/"
+        },
+        "files": [
+            "tests/Fixtures/filtre_min_sec.php",
+            "tests/Fixtures/minsec.php",
+            "tests/Fixtures/inc/filtres/example.php"
         ]
     },
     "authors": [
@@ -18,12 +30,15 @@
         }
     ],
     "require": {
-        "spip/pipeline": "dev-main"
+        "php": ">=8.1"
     },
-    "repositories": {
-        "pipeline": {
-            "type": "git",
-            "url": "/Users/klike/Sites/JamesRezo/spip/pipeline2"
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "symfony/var-dumper": "^6.4"
+    },
+    "config": {
+        "platform": {
+            "php": "8.1.27"
         }
     }
 }
