@@ -26,7 +26,7 @@ class Branch implements TreeInterface
     public function transpile(): TreeInterface
     {
         if (\str_contains($this->content, '#NULL')) {
-            $this->content .= \str_replace('#NULL', 'echo \'appel de la balise null\';', $this->content);
+            $this->content = \str_replace('#NULL', 'echo \'appel de la balise null\';', $this->content);
         }
 
         $branch = clone $this;
@@ -38,11 +38,11 @@ class Branch implements TreeInterface
         return $branch;
     }
 
-    public function add(TreeInterface $noisette): TreeInterface
+    public function add(TreeInterface $subBranch): TreeInterface
     {
         $branch = clone $this;
 
-        $branch->branches[] = $noisette;
+        $branch->branches[] = $subBranch;
 
         return $branch;
     }

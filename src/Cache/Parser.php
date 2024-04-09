@@ -23,6 +23,10 @@ class Parser
      */
     public function getTree(): TreeInterface
     {
+        $success = \preg_match(TreeInterface::NOM_DE_CHAMP, $this->squelette, $matches);
+
+        dump($this->squelette, $matches);
+
         return new Branch($this->squelette);
     }
 }

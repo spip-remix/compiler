@@ -13,6 +13,14 @@ namespace Spip\Component\Compilo\AST;
  */
 interface TreeInterface
 {
+    /** Expression pour trouver un identifiant de boucle */
+    public const NOM_DE_BOUCLE = '[0-9]+|[-_][-_.a-zA-Z0-9]*';
+
+    /** Écriture alambiquée pour rester compatible avec les hexadecimaux des vieux squelettes */
+    public const NOM_DE_CHAMP = '#((' . self::NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)\b(\*{0,2})";
+    /** Balise complète [...(#TOTO) ... ] */
+    public const CHAMP_ETENDU = '/\[([^\[]*?)\(' .self:: NOM_DE_CHAMP . '([^)]*\)[^]]*)\]/S';
+
     /**
      * Undocumented function.
      */
